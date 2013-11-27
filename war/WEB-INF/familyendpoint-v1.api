@@ -1,0 +1,271 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://myapp.appspot.com/_ah/api",
+  "name" : "familyendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://myapp.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "cs160.com",
+  "ownerName" : "cs160.com",
+  "packagePath" : "groupj.advenchorequest",
+  "methods" : {
+    "familyendpoint.listFamily" : {
+      "path" : "family",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.listFamily",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "familyendpoint.updateFamily" : {
+      "path" : "family",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.updateFamily",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "familyendpoint.removeFamily" : {
+      "path" : "family/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.removeFamily",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "familyendpoint.getFamily" : {
+      "path" : "family/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.getFamily",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "familyendpoint.insertFamily" : {
+      "path" : "family",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.insertFamily",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "CollectionResponse_Family" : {
+        "id" : "CollectionResponse_Family",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Family"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Family" : {
+        "id" : "Family",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "children" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Child"
+            }
+          },
+          "tasks" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Task"
+            }
+          }
+        }
+      },
+      "Child" : {
+        "id" : "Child",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "family" : {
+            "$ref" : "Family"
+          },
+          "tasks" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Task"
+            }
+          },
+          "points" : {
+            "type" : "integer"
+          },
+          "level" : {
+            "type" : "integer"
+          },
+          "pointsToNextLevel" : {
+            "type" : "integer"
+          },
+          "charType" : {
+            "type" : "string"
+          },
+          "charTypeFlavor" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Task" : {
+        "id" : "Task",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "child" : {
+            "$ref" : "Child"
+          },
+          "startDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "dueDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "pointValue" : {
+            "type" : "integer"
+          },
+          "photo" : {
+            "type" : "boolean"
+          },
+          "photoURI" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "integer"
+          },
+          "response" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.listFamily" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Family"
+        }
+      },
+      "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.updateFamily" : {
+        "request" : {
+          "$ref" : "Family"
+        },
+        "response" : {
+          "$ref" : "Family"
+        }
+      },
+      "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.removeFamily" : {
+      },
+      "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.getFamily" : {
+        "response" : {
+          "$ref" : "Family"
+        }
+      },
+      "com.cs160.groupj.advenchorequest.models.FamilyEndpoint.insertFamily" : {
+        "request" : {
+          "$ref" : "Family"
+        },
+        "response" : {
+          "$ref" : "Family"
+        }
+      }
+    }
+  }
+}

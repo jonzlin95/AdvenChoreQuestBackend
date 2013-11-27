@@ -1,0 +1,271 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://myapp.appspot.com/_ah/api",
+  "name" : "childendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://myapp.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "cs160.com",
+  "ownerName" : "cs160.com",
+  "packagePath" : "groupj.advenchorequest.models",
+  "methods" : {
+    "childendpoint.getChild" : {
+      "path" : "child/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.ChildEndpoint.getChild",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "childendpoint.listChild" : {
+      "path" : "child",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.ChildEndpoint.listChild",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "childendpoint.removeChild" : {
+      "path" : "child/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.ChildEndpoint.removeChild",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "childendpoint.updateChild" : {
+      "path" : "child",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.ChildEndpoint.updateChild",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "childendpoint.insertChild" : {
+      "path" : "child",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.cs160.groupj.advenchorequest.models.ChildEndpoint.insertChild",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Child" : {
+        "id" : "Child",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "family" : {
+            "$ref" : "Family"
+          },
+          "tasks" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Task"
+            }
+          },
+          "points" : {
+            "type" : "integer"
+          },
+          "level" : {
+            "type" : "integer"
+          },
+          "pointsToNextLevel" : {
+            "type" : "integer"
+          },
+          "charType" : {
+            "type" : "string"
+          },
+          "charTypeFlavor" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Family" : {
+        "id" : "Family",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "children" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Child"
+            }
+          },
+          "tasks" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Task"
+            }
+          }
+        }
+      },
+      "Task" : {
+        "id" : "Task",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "child" : {
+            "$ref" : "Child"
+          },
+          "startDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "dueDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "pointValue" : {
+            "type" : "integer"
+          },
+          "photo" : {
+            "type" : "boolean"
+          },
+          "photoURI" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "integer"
+          },
+          "response" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_Child" : {
+        "id" : "CollectionResponse_Child",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Child"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.cs160.groupj.advenchorequest.models.ChildEndpoint.getChild" : {
+        "response" : {
+          "$ref" : "Child"
+        }
+      },
+      "com.cs160.groupj.advenchorequest.models.ChildEndpoint.listChild" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Child"
+        }
+      },
+      "com.cs160.groupj.advenchorequest.models.ChildEndpoint.removeChild" : {
+      },
+      "com.cs160.groupj.advenchorequest.models.ChildEndpoint.updateChild" : {
+        "request" : {
+          "$ref" : "Child"
+        },
+        "response" : {
+          "$ref" : "Child"
+        }
+      },
+      "com.cs160.groupj.advenchorequest.models.ChildEndpoint.insertChild" : {
+        "request" : {
+          "$ref" : "Child"
+        },
+        "response" : {
+          "$ref" : "Child"
+        }
+      }
+    }
+  }
+}
